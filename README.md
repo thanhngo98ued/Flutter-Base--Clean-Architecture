@@ -27,7 +27,7 @@ lib/
 │   ├── viewmodels/ # State management with Riverpod
 │   ├── screens/    # UI screens and widgets
 ├── main.dart       # Entry point for the app
-
+```plaintext
 ✨ Features
 Riverpod: State management for scalable and reactive UI.
 GetIt: Dependency injection for decoupled architecture.
