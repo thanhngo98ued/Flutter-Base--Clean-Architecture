@@ -7,5 +7,5 @@ class GetUsersUseCase {
 
   GetUsersUseCase(this.repository);
 
-  Future<UserModel> call() => repository.getUser();
+  Future<List<UserModel>?> getUsers() => repository.getUsers();
 }
