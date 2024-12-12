@@ -1,14 +1,12 @@
 import 'package:baseflutter/data/models/user_model.dart';
-import 'package:dio/dio.dart';
-import 'package:retrofit/error_logger.dart';
-import 'package:retrofit/http.dart';
+import 'package:baseflutter/data/sources/remote/client/api_client.dart';
 
-part 'user_remote_data_source.g.dart';
+class UserRemoteDataSource {
+  final ApiClient apiClient;
 
-@RestApi(baseUrl: "https://api.example.com/")
-abstract class UserRemoteDataSource {
-  factory UserRemoteDataSource(Dio dio, {String baseUrl}) = _UserRemoteDataSource;
+  UserRemoteDataSource({required this.apiClient});
 
-  @GET("/user")
-  Future<UserModel> getUser();
+  Future<List<UserModel>?> getUsers() async {
+    return apiClient.getUsers();
+  }
 }
