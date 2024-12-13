@@ -116,7 +116,7 @@ For handling in-app purchases. Code is organized in `optional/iap/`.
 ### 🎛️ **State Management Example**
 - **Riverpod** providers are defined for each ViewModel. For example:
   ```dart
-  final userViewModelProvider = ChangeNotifierProvider<UserViewModel>((ref) => UserViewModel());
+  final users = ref.watch(userViewModelProvider.select((value) => value.valueOrNull?.users ?? []));
   ```
 
 ### ⚙️ **Dependency Injection Example**
