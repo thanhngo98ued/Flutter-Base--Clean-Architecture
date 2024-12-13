@@ -1,14 +1,17 @@
-# BaseFlutter Project
+# ✨ Flutter Project Structure
 
-![Flutter](https://img.shields.io/badge/Flutter-v3.x-blue?logo=flutter&style=flat)
-![Dart](https://img.shields.io/badge/Dart-v3.x-blue?logo=dart&style=flat)
-![License](https://img.shields.io/badge/license-MIT-green)
+This document outlines the folder structure and architecture for a Flutter project using the following technologies:
 
-A robust Flutter project using **Riverpod**, **GetIt**, **Dio**, **Retrofit**, and **Floor** for scalable and maintainable app development. This project demonstrates the use of clean architecture principles, including **MVVM**, **Repository Pattern**, and **Dependency Injection**.
+- 🌱 **Riverpod** for state management
+- ⚙️ **GetIt** for dependency injection
+- 🌐 **Dio** and **Retrofit** for API requests
+- 📦 **Floor** for local database storage
+- 📱 **Admob** for ad integration
+- 🛒 **IAP** for in-app purchases
 
 ---
 
-## 📁 Project Structure
+## 📂 Folder Structure
 
 ```plaintext
 lib/
@@ -28,142 +31,97 @@ lib/
 │   ├── screens/    # UI screens and widgets
 ├── optional/       # Flexing
 │   ├── admob       # Admob package
-│   ├── iap         # Inapp purchase package
+│   ├── iap         # In-app purchase package
 ├── main.dart       # Entry point for the app
 ```
-✨ Features
-- Riverpod: State management for scalable and reactive UI.
-- GetIt: Dependency injection for decoupled architecture.
-- Dio: HTTP client with robust request/response handling.
-- Retrofit: API generation for type-safe RESTful calls.
-- Floor: Local database using SQLite.
-  
-Clean Architecture: Separation of concerns for maintainability.
 
-🚀 Getting Started
+---
 
+### 🌟 **1. core/**
+The core layer contains shared utilities, constants, and dependency injection setup.
 
-Prerequisites
+- **`di.dart`**: Manages dependency injection setup using **GetIt**.
+- **`utils/`**: Utility classes and helper functions (e.g., date formatting, string utilities, etc.).
+- **`constants/`**: Contains constants, configuration, and shared values (e.g., API endpoints, theme colors, etc.).
 
-Flutter SDK: Install here
+### 🌐 **2. data/**
+The data layer is responsible for handling data from APIs, local storage, and repositories.
 
-Dart SDK
+- **`models/`**: Contains data models (e.g., `UserModel`, `VideoModel`).
+- **`sources/`**:
+  - **`remote/`**: For handling API calls using **Dio** and **Retrofit**.
+  - **`local/`**: For managing local database storage using **Floor**.
+- **`repositories/`**: Implements the repository pattern to abstract data sources and provide data to the domain layer.
 
-Android Studio or VS Code
+### 🧩 **3. domain/**
+The domain layer contains business logic, entities, and use cases.
 
-Installation
+- **`entities/`**: Defines core business models (e.g., `User`, `Video`).
+- **`usecases/`**: Contains use case classes that encapsulate specific business rules and logic.
 
-Clone the repository:
+### 🎨 **4. presentation/**
+The presentation layer manages the UI and state management.
 
-```plaintext
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
-```
+- **`viewmodels/`**: State management using **Riverpod** (e.g., `UserViewModel`, `VideoViewModel`).
+- **`screens/`**:
+  - Contains UI screens and widgets (e.g., `HomeScreen`, `SettingsScreen`).
+  - Each screen can have subfolders for widgets and styles if needed.
 
-Install dependencies:
+### 🛠️ **5. optional/**
+This folder is for optional features like ads and in-app purchases.
 
-```plaintext
-flutter pub get
-```
+- **`admob/`**: Implements Admob integration for showing ads.
+- **`iap/`**: Handles in-app purchases using an IAP package.
 
-Run code generation for Retrofit and Riverpod:
+### 🚀 **6. main.dart**
+The entry point for the application. It initializes the app, sets up dependency injection, and runs the root widget.
 
-```plaintext
-flutter pub run build_runner build --delete-conflicting-outputs
-```
-Start the app:
-```plaintext
-flutter run
-```
-🛠️ Core Concepts
+---
 
+## 🛠️ Technologies Used
 
-Dependency Injection
+### 🌱 **Riverpod**
+Used for state management. ViewModels in the `viewmodels/` folder use Riverpod for managing application state.
 
-Managed via GetIt.
+### ⚙️ **GetIt**
+Used for dependency injection. All dependencies are registered in `core/di.dart`.
 
-Centralized in lib/core/di.dart.
+### 🌐 **Dio and Retrofit**
+- **Dio**: For HTTP requests.
+- **Retrofit**: For generating API clients. API sources are implemented in `data/sources/remote/`.
 
-State Management
+### 📦 **Floor**
+Used for local database storage. Local data sources are implemented in `data/sources/local/`.
 
-Built with Riverpod.
+### 📱 **Admob**
+For showing ads. Implementation details are in `optional/admob/`.
 
-ViewModels are annotated with @riverpod and use Provider for reactive updates.
-Networking
+### 🛒 **IAP**
+For handling in-app purchases. Code is organized in `optional/iap/`.
 
-Powered by Dio and Retrofit for API handling.
+---
 
-Interceptors for logging, headers, and error handling.
+## 🔄 Example Workflows
 
-Local Database
+### 🌐 **API Call Workflow**
+1. **Presentation Layer**:
+   - A `ViewModel` in `presentation/viewmodels/` triggers the use case.
+2. **Domain Layer**:
+   - The use case in `domain/usecases/` processes the request.
+3. **Data Layer**:
+   - The repository in `data/repositories/` fetches data from the remote source (`data/sources/remote/`) or local source (`data/sources/local/`).
+4. **Core Layer**:
+   - Utility functions or constants in `core/` may be used.
 
-Built with Floor for offline persistence.
+### 🎛️ **State Management Example**
+- **Riverpod** providers are defined for each ViewModel. For example:
+  ```dart
+  final userViewModelProvider = ChangeNotifierProvider<UserViewModel>((ref) => UserViewModel());
+  ```
 
-🔑 Example Usage
-
-
-Fetching User Data
-
-
-Repository implementation with remote and local data sources:
-
-```dart
-class UserRepositoryImpl implements UserRepository {
-  final UserRemoteDataSource remoteDataSource;
-  final UserLocalDataSource localDataSource;
-
-  UserRepositoryImpl({
-    required this.remoteDataSource,
-    required this.localDataSource,
-  });
-
-  @override
-  Future<UserModel> getUser() async {
-    final localUser = await localDataSource.getUser(1);
-    if (localUser != null) {
-      return localUser;
-    }
-    final remoteUser = await remoteDataSource.getUser();
-    await localDataSource.saveUser(remoteUser);
-    return remoteUser;
-  }
-}
-```
-🖼️ Screenshots
-
-Feature	Screenshot
-User List	
-User Details	
-
-📜 License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-🌟 Contributing
-
-Contributions are welcome! Please create an issue or submit a pull request.
-
-📫 Contact
-
-For questions or support, reach out to:
-
-Author: Your Name
-Email: your-email@example.com
-What You Need to Update
-Replace yourusername and your-repo-name with your GitHub username and repository name.
-Add screenshots in the Screenshots section to showcase the app.
-Provide an email address or contact info if desired.
-This README structure highlights your project's key features while maintaining professionalism and clarity. Let me know if you need further adjustments! 🚀
-
-markdown
-Copy code
-
-### Key Updates:
-- Fixed the structure for clarity and consistency.
-- Added the necessary markdown elements for a more readable format.
-- Ensured proper emoji usage for better visual appeal.
-- Provided placeholders for images (e.g., `path_to_image`) that you should replace with actual URLs or local paths for screenshots.
-
-This should be good for your GitHub repository. Let me know if you need anything else!
-
+### ⚙️ **Dependency Injection Example**
+- Register dependencies in `core/di.dart`:
+  ```dart
+  GetIt.I.registerLazySingleton<ApiClient>(() => ApiClient(Dio()));
+  ```
 
