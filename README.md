@@ -130,3 +130,58 @@ For handling in-app purchases. Code is organized in `optional/iap/`.
   GetIt.I.registerLazySingleton<ApiClient>(() => ApiClient(Dio()));
   ```
 
+---
+
+## 📋 Steps to Run the Project
+
+### 🛠️ Prerequisites
+1. Install **Flutter** (version >= 3.x).
+2. Ensure **Dart SDK** is installed.
+3. Install dependencies for your project by running:
+   ```bash
+   flutter pub get
+   ```
+
+### 🚀 Running the App
+1. Connect your physical device or start an emulator.
+2. Use the following command to run the app:
+   ```bash
+   flutter run
+   ```
+
+### 🧪 Running in Different Environments
+- **Development**:
+  Use the default configuration.
+  ```bash
+  flutter run --flavor development
+  ```
+- **Production**:
+  Build the production version.
+  ```bash
+  flutter build apk --flavor production
+  ```
+
+### ✅ Additional Steps
+- **Generate Retrofit code**:
+  ```bash
+  flutter pub run build_runner build --delete-conflicting-outputs
+  ```
+- **Lint Check**:
+  ```bash
+  flutter analyze
+  ```
+- **Run Tests**:
+  ```bash
+  flutter test
+  ```
+
+---
+
+## 🏆 Certificate of Completion
+
+Congratulations! You have successfully navigated through the architecture and workflows of this Flutter project. We hope this document serves as a helpful guide for setting up and scaling your application. 🚀
+
+---
+
+
+
