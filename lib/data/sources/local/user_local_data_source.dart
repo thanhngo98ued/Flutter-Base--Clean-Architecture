@@ -6,11 +6,11 @@ class UserLocalDataSource {
 
   UserLocalDataSource({required this.database});
 
-  Future<UserModel?> getUser(int id) async {
-    return await database.userDao.getUserById(id);
+  Future<List<UserModel>?> getUsers() async {
+    return await database.userDao.getAllUsers();
   }
 
-  Future<void> saveUser(UserModel user) async {
-    await database.userDao.insertUser(user);
+  Future<void> saveUsers(List<UserModel> users) async {
+    await database.userDao.insertUsers(users);
   }
 }

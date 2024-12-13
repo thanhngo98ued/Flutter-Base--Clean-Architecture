@@ -15,15 +15,14 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<List<UserModel>?> getUsers() async {
-    // Try to fetch from local storage first
-    // final localUser = await localDataSource.getUser(1);
-    // if (localUser != null) {
-    //   return localUser;
-    // }
+    final localUsers = await localDataSource.getUsers();
+    if (localUsers?.isNotEmpty == true) {
+      return localUsers;
+    }
 
     // Fetch from remote if local data is not available
     final users = await remoteDataSource.getUsers();
-    // localDataSource.saveUser(remoteUser); // Save to local storage
+    localDataSource.saveUsers(users ?? []); // Save to local storage
     return users;
   }
 }

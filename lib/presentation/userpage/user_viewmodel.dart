@@ -3,7 +3,7 @@
 import 'package:baseflutter/core/utils/locator_provider.dart';
 import 'package:baseflutter/domain/mapper/user_mapper.dart';
 import 'package:baseflutter/domain/usercases/get_users_usecase.dart';
-import 'package:baseflutter/presentation/viewmodels/state/user_state.dart';
+import 'package:baseflutter/presentation/userpage/state/user_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_viewmodel.g.dart';
