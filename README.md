@@ -1,3 +1,8 @@
+![Flutter](https://img.shields.io/badge/Flutter-v3.x-blue?logo=flutter&style=flat)
+![Dart](https://img.shields.io/badge/Dart-v3.x-blue?logo=dart&style=flat)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+
 # ✨ Flutter Project Structure
 
 This document outlines the folder structure and architecture for a Flutter project using the following technologies:
