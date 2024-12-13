@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+		<color name="background_light_color">#FFB03B</color>
+		<color name="color_icon_background">#666467</color>
+	  <color name="control_video_call">#343839</color>
+
+</resources>

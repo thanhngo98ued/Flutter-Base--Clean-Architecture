@@ -10,6 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_localizations:
+    sdk: flutter
+  intl: any
   cupertino_icons: ^1.0.8
   dio: ^5.7.0
   riverpod_annotation: ^2.3.5
@@ -20,6 +23,12 @@ dependencies:
   json_annotation: ^4.9.0
   get_it: ^8.0.2
   pretty_dio_logger: ^1.4.0
+  flutter_screenutil: ^5.9.3
+  flutter_svg: ^2.0.10+1
+  google_mobile_ads: ^5.2.0
+  in_app_purchase: ^3.2.0
+  in_app_purchase_android: ^0.3.0
+  in_app_purchase_storekit: ^0.3.4
 
 dev_dependencies:
   flutter_test:
@@ -27,9 +36,41 @@ dev_dependencies:
 
   flutter_lints: ^4.0.0
   json_serializable: ^6.9.0
+  flutter_gen_runner: ^5.4.0
   build_runner: ^2.4.13
   retrofit_generator: ^9.1.5
   floor_generator: ^1.4.2
 
+flutter_gen:
+  integrations:
+    flutter_svg: true
+
+  assets:
+    enabled: true
+
+  colors:
+    enabled: true
+    inputs:
+      - assets/colors/colors.xml
+    outputs:
+      class_name: AppColors
+  fonts:
+    enabled: true
+    outputs:
+      class_name: FontFamily
+
 flutter:
   uses-material-design: true
+  generate: true
+  assets:
+    - assets/images/
+    - assets/colors/
+    - assets/video/
+    - assets/lotties/
+    - assets/sound/
+
+  fonts:
+    - family: Itim
+      fonts:
+        - asset: assets/fonts/itim.ttf
+          weight: 400
