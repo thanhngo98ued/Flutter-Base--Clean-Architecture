@@ -26,6 +26,9 @@ lib/
 ├── presentation/   # Presentation layer (UI, ViewModels)
 │   ├── viewmodels/ # State management with Riverpod
 │   ├── screens/    # UI screens and widgets
+├── optional/       # Flexing
+│   ├── admob       # Admob package
+│   ├── iap         # Inapp purchase package
 ├── main.dart       # Entry point for the app
 ```
 ✨ Features
