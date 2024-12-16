@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
-import 'package:baseflutter/gen/colors.gen.dart';
 import 'package:baseflutter/optional/admod/consent_manager.dart';
 import 'package:baseflutter/optional/admod/constant.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import '../../../presentation/resources/gen/colors.gen.dart';
 import 'native_ad_view_model.dart';
 
 class NativePlatformAd extends ConsumerStatefulWidget {

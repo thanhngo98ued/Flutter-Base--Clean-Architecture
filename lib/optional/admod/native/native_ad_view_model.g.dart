@@ -6,7 +6,7 @@ part of 'native_ad_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$nativeAdViewModelHash() => r'7c2255244bd5fcbfaf945c7dd071531aebed07fc';
+String _$nativeAdViewModelHash() => r'52d5e31cb72911a0ec31ee77c10b7e56e8dfda81';
 
 /// See also [NativeAdViewModel].
 @ProviderFor(NativeAdViewModel)
@@ -23,4 +23,4 @@ final nativeAdViewModelProvider =
 
 typedef _$NativeAdViewModel = AutoDisposeNotifier<AdsState>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

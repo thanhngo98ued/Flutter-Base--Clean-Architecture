@@ -1,5 +1,5 @@
 import 'package:baseflutter/core/di/di.dart';
-import 'package:baseflutter/presentation/userpage/view/user_page.dart';
+import 'package:baseflutter/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -22,13 +22,13 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: MaterialApp(
+      child: MaterialApp.router(
+          routerConfig: router,
           title: 'Flutter Demo',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const UserPage(),
           locale: null,
           localizationsDelegates: const [
             AppLocalizations.delegate,
