@@ -37,6 +37,7 @@ class _UserViewState extends ConsumerState<UserPage> {
             height: 40.h,
           ),
           _buildUsers(),
+          const Text(String.fromEnvironment("ENV")),
           SizedBox(
             height: 100.h,
           ),
