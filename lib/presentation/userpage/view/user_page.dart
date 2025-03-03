@@ -38,7 +38,7 @@ class _UserViewState extends ConsumerState<UserPage> {
           ),
           _buildUsers(),
           SizedBox(
-            height: 80.h,
+            height: 100.h,
           ),
         ],
       ),
