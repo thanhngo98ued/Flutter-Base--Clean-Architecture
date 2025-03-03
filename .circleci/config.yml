@@ -1,0 +1,62 @@
+version: 2.1
+
+orbs:
+  flutter: circleci/flutter@2.0.0
+
+references:
+  cache_key: &cache_key
+    key: flutter-deps-{{ checksum "pubspec.yaml" }}-{{ checksum "pubspec.lock" }}
+
+config_flutter: &config_flutter
+  working_directory: ~/code
+  docker:
+    - image: "ghcr.io/cirruslabs/flutter:latest" # ✅ Use latest stable Flutter image
+  environment:
+    FLUTTER_VERSION: stable
+    JVM_OPTS: -Xmx4g
+
+jobs:
+  test_code:
+    <<: *config_flutter
+    steps:
+      - checkout
+      - restore_cache:
+          <<: *cache_key
+      - run:
+          name: Install Flutter Dependencies
+          command: flutter pub get
+      # - run:
+      #     name: Run Flutter Tests
+      #     command: flutter test
+      - save_cache:
+          <<: *cache_key
+          paths:
+            - ~/.pub-cache
+      - store_test_results:
+          path: test-results
+
+  build_and_deploy:
+    <<: *config_flutter
+    steps:
+      - checkout
+      - run:
+          name: Install Fastlane
+          command: sudo gem install fastlane -NV
+      - run:
+          name: Build & Upload to Firebase
+          command: fastlane beta # Assumes you have a Fastlane lane named "beta"
+
+workflows:
+  version: 2
+  check_code_and_deploy:
+    jobs:
+      - test_code:
+          filters:
+            branches:
+              ignore: main # Run tests on all branches except main
+      - build_and_deploy:
+          requires:
+            - test_code
+          filters:
+            branches:
+              only: main # Only deploy on the main branch
