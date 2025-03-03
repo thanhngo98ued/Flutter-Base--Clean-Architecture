@@ -71,7 +71,6 @@ flutter:
   assets:
     - assets/images/
     - assets/colors/
-    - assets/video/
     - assets/lotties/
     - assets/sound/
 
