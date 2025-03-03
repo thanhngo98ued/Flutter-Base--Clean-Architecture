@@ -3,11 +3,16 @@ default_platform(:android)
 platform :android do
   desc "Build APK and distribute via Firebase"
   lane :beta do
-    sh "flutter build apk --release"
+    # Build the APK or AAB
+    sh("flutter build apk --release")
+  
+    # Upload to Firebase App Distribution
     firebase_app_distribution(
-      app: "1:562683139335:android:cdccc659113aa46064e1a2",
-      testers: "thanhngo98ued@gmail.com",
-      release_notes: "New Flutter build from CircleCI"
+      app: "1:562683139335:android:cdccc659113aa46064e1a2",  # Firebase app ID (found in Firebase Console)
+      groups: "ThanhTest",  # Tester groups from Firebase
+      release_notes: "Release notes for the app",
+      apk_path: "../build/app/outputs/flutter-apk/app-release.apk", 
+      # If you use .aab instead of APK, update this path accordingly
     )
   end
 
