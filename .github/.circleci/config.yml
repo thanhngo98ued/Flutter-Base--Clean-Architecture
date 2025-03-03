@@ -1,0 +1,61 @@
+version: 2.1
+
+executors:
+  flutter-executor:
+    docker:
+      - image: "cirrusci/flutter:latest"
+    resource_class: large
+    working_directory: ~/project
+
+jobs:
+  build:
+    executor: flutter-executor
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-flutter-deps-{{ checksum "pubspec.yaml" }}
+      - run:
+          name: Install Flutter dependencies
+          command: flutter pub get
+      - save_cache:
+          paths:
+            - ~/.pub-cache
+          key: v1-flutter-deps-{{ checksum "pubspec.yaml" }}
+      - run:
+          name: Run Flutter Tests
+          command: flutter test
+      - run:
+          name: Build APK
+          command: flutter build apk --release
+      - store_artifacts:
+          path: build/app/outputs/flutter-apk/app-release.apk
+          destination: release-apk
+
+  deploy:
+    executor: flutter-executor
+    steps:
+      - checkout
+      - run:
+          name: Build and Sign APK
+          command: |
+            flutter build apk --release
+            flutter build appbundle
+      - run:
+          name: Distribute to Firebase
+          command: bundle exec fastlane android beta
+      - store_artifacts:
+          path: build/app/outputs/bundle/release/app-release.aab
+          destination: release-aab
+
+workflows:
+  version: 2
+  flutter_ci_cd:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
