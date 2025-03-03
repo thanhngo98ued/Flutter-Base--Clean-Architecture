@@ -1,0 +1,22 @@
+default_platform(:android)
+
+platform :android do
+  desc "Build APK and distribute via Firebase"
+  lane :beta do
+    sh "flutter build apk --release"
+    firebase_app_distribution(
+      app: "1:562683139335:android:cdccc659113aa46064e1a2",
+      testers: "thanhngo98ued@gmail.com",
+      release_notes: "New Flutter build from CircleCI"
+    )
+  end
+
+  desc "Upload AAB to Google Play"
+  lane :deploy do
+    sh "flutter build appbundle"
+    upload_to_play_store(
+      track: "beta",
+      json_key: "fastlane/google-play.json"
+    )
+  end
+end
