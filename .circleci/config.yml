@@ -54,9 +54,9 @@ workflows:
           filters:
             branches:
               ignore: main # Run tests on all branches except main
-      - build_and_deploy:
-          requires:
-            - test_code
-          filters:
-            branches:
-              only: main # Only deploy on the main branch
+      # - build_and_deploy:
+      #     requires:
+      #       - test_code
+      #     filters:
+      #       branches:
+      #         only: main # Only deploy on the main branch
