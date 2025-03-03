@@ -16,7 +16,7 @@ platform :android do
     sh "flutter build appbundle"
     upload_to_play_store(
       track: "beta",
-      json_key: "fastlane/google-play.json"
+      json_key: "..google-play.json"
     )
   end
 end
